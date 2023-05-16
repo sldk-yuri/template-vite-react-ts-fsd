@@ -4,7 +4,6 @@ module.exports = {
     'plugin:eslint-plugin-import/recommended',
     'eslint-config-airbnb',
     'eslint-config-prettier',
-    '@feature-sliced',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -18,10 +17,69 @@ module.exports = {
     'react/require-default-props': 'off',
     'import/prefer-default-export': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'import/order': [
+      'error',
+      {
+        pathGroups: [
+          { pattern: 'react', group: 'builtin' },
+          { pattern: 'vite', group: 'builtin' },
+          { pattern: '~shared/**', group: 'internal' },
+          { pattern: '~entities/**', group: 'internal' },
+          { pattern: '~features/**', group: 'internal' },
+          { pattern: '~widgets/**', group: 'internal' },
+          { pattern: '~pages/**', group: 'internal' },
+        ],
+        pathGroupsExcludedImportTypes: ['builtin'],
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+        ],
+        'newlines-between': 'never',
+        alphabetize: { order: 'asc', caseInsensitive: true },
+      },
+    ],
+    'no-restricted-imports': [
+      'error',
+      {
+        patterns: [
+          {
+            group: [
+              '~shared/*/*/**',
+              '~entities/*/**',
+              '~features/*/**',
+              '~widgets/*/**',
+              '~pages/*/**',
+              '~app/**',
+            ],
+            message:
+              'Direct access to the internal parts of the module is prohibited',
+          },
+          {
+            group: [
+              '../**/shared',
+              '../**/entities',
+              '../**/features',
+              '../**/widgets',
+              '../**/pages',
+              '../**/app',
+            ],
+            message: 'Prefer absolute imports instead of relatives',
+          },
+        ],
+      },
+    ],
+    'import/no-extraneous-dependencies': [
+      'error',
+      { devDependencies: ['./vite.config.ts'] },
+    ],
   },
   overrides: [
     {
-      files: ['*.ts', '*.tsx'],
+      files: ['./src/**/*.ts', './src/**/*.tsx'],
       extends: [
         'plugin:eslint-plugin-import/typescript',
         'eslint-config-airbnb-typescript',
