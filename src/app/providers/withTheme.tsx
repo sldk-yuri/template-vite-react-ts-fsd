@@ -1,10 +1,10 @@
+import { ReactNode, useMemo } from 'react';
 import {
   CssBaseline,
   ThemeProvider as MuiThemeProvider,
   StyledEngineProvider,
   ThemeOptions,
 } from '@mui/material';
-import { ReactNode, useMemo } from 'react';
 import { GlobalStyles, createTheme } from '~shared/lib/mui';
 
 type ThemeProviderProps = {
