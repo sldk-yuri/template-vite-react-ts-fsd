@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import TuneIcon from '@mui/icons-material/Tune';
 import {
   Button,
   Card,
@@ -11,7 +12,9 @@ import {
   Typography,
   keyframes,
 } from '@mui/material';
+import { OpenDrawerFab } from '~features/layout';
 import { FsdIcon, MuiIcon, ReactIcon, ViteIcon } from '~shared/ui/icons';
+import { SettingsDrawer } from '~widgets/settings-drawer';
 
 const spin = keyframes`
   from {
@@ -134,6 +137,16 @@ export function MainPage() {
           </CardContent>
         </Card>
       </Stack>
+
+      <SettingsDrawer />
+      <OpenDrawerFab
+        drawerId="settings"
+        size="small"
+        aria-label="open settings drawer"
+        sx={{ position: 'absolute', right: 16, bottom: 16 }}
+      >
+        <TuneIcon />
+      </OpenDrawerFab>
     </Container>
   );
 }
