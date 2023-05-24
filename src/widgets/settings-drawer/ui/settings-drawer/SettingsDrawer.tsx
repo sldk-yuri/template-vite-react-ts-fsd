@@ -1,7 +1,8 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { Stack, Typography } from '@mui/material';
+import { InputLabel, Stack, Typography } from '@mui/material';
 import { LayoutDrawer } from '~entities/layout';
 import { CloseDrawerIconBtn } from '~features/layout';
+import { ToggleThemeModeBtnGroup } from '~features/settings';
 
 export function SettingsDrawer() {
   return (
@@ -22,8 +23,18 @@ export function SettingsDrawer() {
           </CloseDrawerIconBtn>
         </Stack>
       }
-      content={<Typography>Content</Typography>}
-      footer={<Typography>Footer</Typography>}
+      content={
+        <Stack spacing={1}>
+          <InputLabel>Color theme</InputLabel>
+          <ToggleThemeModeBtnGroup
+            size="large"
+            sx={{
+              display: 'flex',
+              '& .MuiButtonBase-root': { flexGrow: 1 },
+            }}
+          />
+        </Stack>
+      }
     />
   );
 }
