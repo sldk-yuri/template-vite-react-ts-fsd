@@ -90,6 +90,9 @@ module.exports = {
         project: ['tsconfig.json'],
       },
       plugins: ['@typescript-eslint/eslint-plugin'],
+      rules: {
+        '@typescript-eslint/indent': 'off',
+      },
     },
   ],
   settings: {
