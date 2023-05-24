@@ -5,6 +5,8 @@ import {
   StyledEngineProvider,
   ThemeOptions,
 } from '@mui/material';
+import { useStore } from 'zustand';
+import { settingsModel } from '~entities/settings';
 import { GlobalStyles, createTheme } from '~shared/lib/mui';
 
 type ThemeProviderProps = {
@@ -13,7 +15,10 @@ type ThemeProviderProps = {
 
 export function ThemeProvider(props: ThemeProviderProps) {
   const { children } = props;
-  const themeMode = 'dark';
+  const themeMode = useStore(
+    settingsModel.settingsStore,
+    (state) => state.themeMode,
+  );
 
   const theme: ThemeOptions = useMemo(
     () => createTheme(themeMode),
