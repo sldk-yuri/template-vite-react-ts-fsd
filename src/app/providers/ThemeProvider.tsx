@@ -5,20 +5,13 @@ import {
   StyledEngineProvider,
   ThemeOptions,
 } from '@mui/material';
-import { useStore } from 'zustand';
 import { settingsModel } from '~entities/settings';
 import { GlobalStyles, createTheme } from '~shared/lib/mui';
 
-type ThemeProviderProps = {
-  children: ReactNode;
-};
-
-export function ThemeProvider(props: ThemeProviderProps) {
+export function ThemeProvider(props: { children: ReactNode }) {
   const { children } = props;
-  const themeMode = useStore(
-    settingsModel.settingsStore,
-    (state) => state.themeMode,
-  );
+
+  const themeMode = settingsModel.useThemeMode();
 
   const theme: ThemeOptions = useMemo(
     () => createTheme(themeMode),

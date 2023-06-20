@@ -1,11 +1,8 @@
 import { ReactNode } from 'react';
-import { ThemeProvider } from './withTheme';
+import { ThemeProvider } from './ThemeProvider';
 
-type ProviderProps = {
-  children: ReactNode;
-};
-
-export function Provider(props: ProviderProps) {
+export function Provider(props: { children: ReactNode }) {
   const { children } = props;
+
   return <ThemeProvider>{children}</ThemeProvider>;
 }
