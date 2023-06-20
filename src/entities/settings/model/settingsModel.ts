@@ -1,5 +1,5 @@
 import { PaletteMode } from '@mui/material';
-import { StateCreator, createStore } from 'zustand';
+import { StateCreator, createStore, useStore } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
 export type ThemeMode = PaletteMode;
@@ -33,3 +33,6 @@ export const settingsStore = createStore<SettingsState>()(
     { name: 'settings' },
   ),
 );
+
+export const useThemeMode = () =>
+  useStore(settingsStore, (state) => state.themeMode);
