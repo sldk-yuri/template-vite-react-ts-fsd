@@ -1,13 +1,20 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { InputLabel, Stack, Typography } from '@mui/material';
-import { LayoutDrawer } from '~entities/layout';
-import { CloseDrawerIconBtn } from '~features/layout';
+import { IconButton, InputLabel, Stack, Typography } from '@mui/material';
 import { ToggleThemeModeBtnGroup } from '~features/settings';
+import { Drawer } from '~shared/ui/drawer';
 
-export function SettingsDrawer() {
+type SettingsDrawerProps = {
+  open: boolean;
+  onClose: VoidFunction;
+};
+
+export function SettingsDrawer(props: SettingsDrawerProps) {
+  const { open, onClose } = props;
+
   return (
-    <LayoutDrawer
-      drawerId="settings"
+    <Drawer
+      open={open}
+      onClose={onClose}
       header={
         <Stack
           direction="row"
@@ -15,12 +22,9 @@ export function SettingsDrawer() {
           justifyContent="space-between"
         >
           <Typography>Settings</Typography>
-          <CloseDrawerIconBtn
-            drawerId="settings"
-            aria-label="close settings drawer"
-          >
+          <IconButton onClick={onClose} aria-label="close settings drawer">
             <CloseIcon />
-          </CloseDrawerIconBtn>
+          </IconButton>
         </Stack>
       }
       content={

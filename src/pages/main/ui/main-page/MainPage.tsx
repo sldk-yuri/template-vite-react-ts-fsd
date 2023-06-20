@@ -7,12 +7,12 @@ import {
   CardContent,
   CardHeader,
   Container,
+  Fab,
   IconButton,
   Stack,
   Typography,
   keyframes,
 } from '@mui/material';
-import { OpenDrawerFab } from '~features/layout';
 import { FsdIcon, MuiIcon, ReactIcon, ViteIcon } from '~shared/ui/icons';
 import { SettingsDrawer } from '~widgets/settings-drawer';
 
@@ -27,9 +27,18 @@ const spin = keyframes`
 
 export function MainPage() {
   const [count, setCount] = useState(0);
+  const [open, setOpen] = useState(false);
 
   const handleCount = () => {
     setCount((prevCount) => prevCount + 1);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
   };
 
   return (
@@ -138,15 +147,15 @@ export function MainPage() {
         </Card>
       </Stack>
 
-      <SettingsDrawer />
-      <OpenDrawerFab
-        drawerId="settings"
+      <SettingsDrawer open={open} onClose={handleClose} />
+      <Fab
+        onClick={handleOpen}
         size="small"
         aria-label="open settings drawer"
         sx={{ position: 'absolute', right: 16, bottom: 16 }}
       >
         <TuneIcon />
-      </OpenDrawerFab>
+      </Fab>
     </Container>
   );
 }
