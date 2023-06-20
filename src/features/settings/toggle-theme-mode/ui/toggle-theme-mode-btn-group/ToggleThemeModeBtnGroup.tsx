@@ -5,24 +5,19 @@ import {
   ToggleButton,
   ToggleButtonGroupProps,
 } from '@mui/material';
-import { StoreApi, useStore } from 'zustand';
 import { settingsModel } from '~entities/settings';
 
 type ToggleThemeModeBtnGroupProps = Omit<
   ToggleButtonGroupProps,
   'value' | 'onChange' | 'exclusive' | 'aria-label'
-> & {
-  model?: StoreApi<settingsModel.SettingsState>;
-};
+>;
 
 export function ToggleThemeModeBtnGroup(props: ToggleThemeModeBtnGroupProps) {
-  const { model = settingsModel.settingsStore, ...other } = props;
-
-  const themeMode = useStore(model, (state) => state.themeMode);
+  const themeMode = settingsModel.useThemeMode();
 
   const handleModeToggle = (_: any, newThemeMode: settingsModel.ThemeMode) => {
     if (!newThemeMode) return;
-    model.getState().setThemeMode(newThemeMode);
+    settingsModel.settingsStore.getState().setThemeMode(newThemeMode);
   };
 
   return (
@@ -31,7 +26,7 @@ export function ToggleThemeModeBtnGroup(props: ToggleThemeModeBtnGroupProps) {
       onChange={handleModeToggle}
       exclusive
       aria-label="theme color mode"
-      {...other}
+      {...props}
     >
       <ToggleButton value="light" aria-label="light theme mode">
         <LightModeIcon />
